@@ -21,5 +21,10 @@ export class SummaryPage {
             .getByRole('button', { name: 'Confirm Details' })
             .click();
 
+        await expect(
+            this.page.locator(
+                'iframe[title="Secure card payment input frame"]'
+            )
+        ).toBeVisible({ timeout: 15000 });
     }
 }

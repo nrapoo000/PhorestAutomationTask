@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class PaymentPage {
 
@@ -31,9 +31,16 @@ export class PaymentPage {
 
     async pay() {
 
-        await this.page
-            .getByRole('button', { name: 'Pay' })
-            .click();
+        const payButton = this.page.getByRole('button', {
+            name: 'Pay'
+        });
 
+        await expect(payButton).toBeEnabled();
+
+        await payButton.click();
+
+        await expect(
+            this.page.getByText('Payment accepted, thank you!')
+        ).toBeVisible({ timeout: 15000 });
     }
 }
