@@ -13,6 +13,7 @@ The automation follows the **Page Object Model (POM)** design pattern to improve
 - Playwright
 - TypeScript
 - Node.js
+- Page Object Model (POM)
 
 ---
 
@@ -50,7 +51,7 @@ The automated test covers the following user journey:
 - Complete the payment
 - Verify the confirmation page
 
-The test runs successfully in:
+The test runs successfully across the following browsers:
 
 - Chromium
 - Firefox
@@ -63,7 +64,7 @@ The test runs successfully in:
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/nrapoo000/PhorestAutomationTask.git
 ```
 
 Install dependencies:
@@ -76,7 +77,7 @@ npm install
 
 ## Running the Tests
 
-Run all Playwright tests:
+Run all Playwright tests across Chromium, Firefox and WebKit:
 
 ```bash
 npx playwright test
@@ -98,6 +99,16 @@ npx playwright show-report
 
 ## Notes
 
-The assignment requested verification of the confirmation emails after purchase.
+The assignment requested verification of the confirmation emails following a successful purchase.
 
-The UI purchase flow has been fully automated. Email verification was not implemented because the provided development environment did not provide access to a test mailbox or email testing service, making automated verification of email delivery outside the scope of the provided environment.
+The UI purchase flow has been fully automated. Email verification was not implemented because the provided development environment did not include access to a test mailbox or email testing service. If such an environment were available, the automation could be extended to validate delivery of both the gift voucher email and the purchase receipt.
+
+---
+
+## Observations
+
+During repeated execution of the automated tests, intermittent behaviour was observed while exercising the demo application.
+
+The same end-to-end test occasionally passed across all supported browsers (Chromium, Firefox and WebKit), while subsequent executions produced intermittent failures at different stages of the purchase flow (for example, the Summary page loading and Payment confirmation).
+
+To improve the reliability of the automation, explicit synchronization was added before page interactions and assertions. The intermittent behaviour was observed during testing and may warrant further investigation.
