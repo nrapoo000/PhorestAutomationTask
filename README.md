@@ -107,8 +107,6 @@ The UI purchase flow has been fully automated. Email verification was not implem
 
 ## Observations
 
-During repeated execution of the automated tests, intermittent behaviour was observed while exercising the demo application.
+During testing, it was observed that the end-to-end payment flow could occasionally exceed Playwright's default 30-second test timeout due to varying response times from the demo application and the Stripe payment process.
 
-The same end-to-end test occasionally passed across all supported browsers (Chromium, Firefox and WebKit), while subsequent executions produced intermittent failures at different stages of the purchase flow (for example, the Summary page loading and Payment confirmation).
-
-To improve the reliability of the automation, explicit synchronization was added before page interactions and assertions. The intermittent behaviour was observed during testing and may warrant further investigation.
+To improve test reliability, the global Playwright test timeout was increased to 60 seconds in `playwright.config.ts`. Following this change, the automated test executed consistently across multiple runs in Chromium, Firefox, and WebKit.
